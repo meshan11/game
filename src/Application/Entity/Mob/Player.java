@@ -23,6 +23,8 @@ public class Player extends Mob {
 		if (input.down) ya++;
 		if (input.left) xa--;
 		if (input.right) xa++;
+		
+		if (xa != 0 || ya != 0) move(xa, ya);
 	}
 
 	public void render() {
