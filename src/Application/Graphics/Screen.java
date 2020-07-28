@@ -46,6 +46,24 @@ public class Screen {
 		}
 	}
 
+	public void renderPlayer(int xp, int yp, Sprite sprite) {
+		xp -= xOffset;
+		yp -= yOffset;
+		for (int y = 0; y < sprite.SIZE; y++)
+		{
+			int ya = y + yp;
+			for (int x = 0; x < sprite.SIZE; x++)
+			{
+				int xa = x + xp;
+				if (xa < -sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
+				int color = sprite.pixels[x + y * sprite.SIZE];
+				if (color != 0xffff00ff) // buffered image read alpha channel as well
+					pixels[xa + ya * width] = color;
+			}
+		}
+	}
+
 	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

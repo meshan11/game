@@ -56,7 +56,7 @@ public class Game extends Canvas implements Runnable {
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);
-		
+
 		game.start();
 	}
 
@@ -85,9 +85,9 @@ public class Game extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 		int updates = 0;
-		
+
 		requestFocus();
-		
+
 		while (running)
 		{
 			long now = System.nanoTime();
@@ -127,7 +127,11 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		level.render(player.x, player.y, screen);
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
+
 		for (int i = 0; i < pixels.length; i++)
 		{
 			pixels[i] = screen.pixels[i];

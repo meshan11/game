@@ -7,8 +7,30 @@ public class Sprite {
 	private SpriteSheet sheet;
 
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
+	public static Sprite flower = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite rock = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x3471eb);
-
+	
+	public static Sprite player0 = new Sprite(16, 0, 2, SpriteSheet.tiles);
+	
+	public static Sprite player_forward = new Sprite(32, 5, 3, SpriteSheet.tiles);
+	public static Sprite player_back = new Sprite(32, 5, 4, SpriteSheet.tiles);
+	public static Sprite player_left = new Sprite(32, 5, 5, SpriteSheet.tiles);
+	public static Sprite player_right = new Sprite(32, 5, 6, SpriteSheet.tiles);
+	
+	
+	public static Sprite player_forward_1 = new Sprite(32, 6, 3, SpriteSheet.tiles);
+	public static Sprite player_forward_2 = new Sprite(32, 7, 3, SpriteSheet.tiles);
+	
+	public static Sprite player_back_1 = new Sprite(32, 6, 4, SpriteSheet.tiles);
+	public static Sprite player_back_2 = new Sprite(32, 7, 4, SpriteSheet.tiles);
+	
+	public static Sprite player_left_1 = new Sprite(32, 6, 5, SpriteSheet.tiles);
+	public static Sprite player_left_2 = new Sprite(32, 7, 5, SpriteSheet.tiles);
+	
+	public static Sprite player_right_1 = new Sprite(32, 6, 6, SpriteSheet.tiles);
+	public static Sprite player_right_2 = new Sprite(32, 7, 6, SpriteSheet.tiles);
+	
 	public Sprite(int size, int color) {
 		SIZE = size;
 		pixels = new int[SIZE * SIZE];
@@ -17,10 +39,10 @@ public class Sprite {
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
+		this.pixels = new int[SIZE * SIZE];
 		this.x = x * size;
 		this.y = y * size;
 		this.sheet = sheet;
-		this.pixels = new int[SIZE * size];
 		load();
 	}
 
@@ -29,7 +51,7 @@ public class Sprite {
 		{
 			for (int x = 0; x < SIZE; x++)
 			{
-				pixels[x + y * SIZE] = sheet.pixels[(this.x + x) + (this.y + y) * sheet.SIZE];
+				pixels[x + y * SIZE] = sheet.pixels[(this.x + x) + ((this.y + y) * sheet.SIZE)];
 			}
 		}
 	}
