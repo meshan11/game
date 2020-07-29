@@ -14,6 +14,7 @@ import Application.Graphics.Screen;
 import Application.Input.Keyboard;
 import Application.Level.Level;
 import Application.Level.RandomLevel;
+import Application.Level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +41,8 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(size);
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/textures/level.png");
+		//level = new RandomLevel(64, 64);
 
 		keyboard = new Keyboard();
 		player = new Player(keyboard);
