@@ -15,6 +15,7 @@ import Application.Input.Keyboard;
 import Application.Level.Level;
 import Application.Level.RandomLevel;
 import Application.Level.SpawnLevel;
+import Application.Level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -41,11 +42,11 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(size);
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		level = new SpawnLevel("/textures/level.png");
-		//level = new RandomLevel(64, 64);
+		level = Level.spawn;
 
 		keyboard = new Keyboard();
-		player = new Player(keyboard);
+		TileCoordinate playerSpawn = new TileCoordinate(19, 62);
+		player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard);
 		addKeyListener(keyboard);
 	}
 
