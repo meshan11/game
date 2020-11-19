@@ -1,7 +1,9 @@
 package Application;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -11,10 +13,10 @@ import javax.swing.JFrame;
 
 import Application.Entity.Mob.Player;
 import Application.Graphics.Screen;
+import Application.Graphics.Sprite;
 import Application.Input.Keyboard;
+import Application.Input.Mouse;
 import Application.Level.Level;
-import Application.Level.RandomLevel;
-import Application.Level.SpawnLevel;
 import Application.Level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
@@ -47,7 +49,12 @@ public class Game extends Canvas implements Runnable {
 		keyboard = new Keyboard();
 		TileCoordinate playerSpawn = new TileCoordinate(19, 62);
 		player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard);
+		player.init(level);
+
 		addKeyListener(keyboard);
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 
 	public static void main(String[] args) {
@@ -119,6 +126,7 @@ public class Game extends Canvas implements Runnable {
 	public void update() {
 		keyboard.update();
 		player.update();
+		level.update();
 	}
 
 	public void render() {
@@ -135,6 +143,9 @@ public class Game extends Canvas implements Runnable {
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
 
+		Sprite sprite = new Sprite(80, 80, 0xff00ff);
+		screen.renderSprite(0, 0, sprite, true);
+		
 		for (int i = 0; i < pixels.length; i++)
 		{
 			pixels[i] = screen.pixels[i];
@@ -142,6 +153,10 @@ public class Game extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setColor(Color.white);
+		g.setFont(new Font("Verdana", 0, 50));
+		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
+		if (Mouse.getB() != -1) g.drawString("Button: " + Mouse.getB(), 70, 70);
 
 		g.dispose();
 		bs.show();

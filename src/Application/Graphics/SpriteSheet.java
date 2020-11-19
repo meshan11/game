@@ -10,6 +10,7 @@ public class SpriteSheet {
 	public final int SIZE;
 	public int[] pixels;
 	
+	public static SpriteSheet projectile = new SpriteSheet("/textures/sheets/projectiles/wizard.png", 48);
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheet.png", 256);
 	public static SpriteSheet spawn_level = new SpriteSheet("/textures/sheets/spawn_level.png", 48);
 	

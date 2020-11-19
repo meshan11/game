@@ -1,8 +1,12 @@
 package Application.Entity.Mob;
 
+import Application.Game;
+import Application.Entity.Projectile.MagicProjectile;
+import Application.Entity.Projectile.Projectile;
 import Application.Graphics.Screen;
 import Application.Graphics.Sprite;
 import Application.Input.Keyboard;
+import Application.Input.Mouse;
 
 public class Player extends Mob {
 
@@ -10,6 +14,8 @@ public class Player extends Mob {
 	private Sprite playerSprite;
 	private int animate = 0;
 	private boolean walking = false;
+
+	private int fireRate = 0;
 
 	public Player(Keyboard input) {
 		this.input = input;
@@ -20,10 +26,13 @@ public class Player extends Mob {
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		fireRate = MagicProjectile.FIRE_RATE;
 	}
 
 	@Override
 	public void update() {
+		if (fireRate > 0) fireRate--;
+
 		int xa = 0, ya = 0;
 		if (animate < 10000)
 			animate++;
@@ -42,6 +51,28 @@ public class Player extends Mob {
 		else
 		{
 			walking = false;
+		}
+
+		clear();
+		updateShooting();
+	}
+
+	private void clear() {
+		for (int i = 0; i < level.getProjectiles().size(); i++)
+		{
+			Projectile p = level.getProjectiles().get(i);
+			if (p.isRemoved()) level.getProjectiles().remove(i);
+		}
+	}
+
+	private void updateShooting() {
+		if (Mouse.getB() == 1 && fireRate <= 0)
+		{
+			double dx = Mouse.getX() - (Game.width * Game.scale) / 2;
+			double dy = Mouse.getY() - (Game.height * Game.scale) / 2;
+			double dir = Math.atan2(dy, dx);
+			shoot(x, y, dir);
+			fireRate = MagicProjectile.FIRE_RATE;
 		}
 	}
 
