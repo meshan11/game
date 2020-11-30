@@ -3,6 +3,7 @@ package Application.Entity.Mob;
 import Application.Entity.Entity;
 import Application.Entity.Projectile.MagicProjectile;
 import Application.Entity.Projectile.Projectile;
+import Application.Entity.particle.Particle;
 import Application.Graphics.Sprite;
 
 public abstract class Mob extends Entity {
@@ -29,6 +30,7 @@ public abstract class Mob extends Entity {
 			x += xa;
 			y += ya;
 		}
+		
 	}
 
 	public void update() {
@@ -49,7 +51,7 @@ public abstract class Mob extends Entity {
 	public void shoot(int x, int y, double dir) {
 		// dir = dir * (180 / Math.PI);
 		Projectile p = new MagicProjectile(x, y, dir);
-		level.addProjectile(p);
+		level.add(p);
 		
 		//dir = Math.toDegrees(dir);
 		//System.out.println(dir);

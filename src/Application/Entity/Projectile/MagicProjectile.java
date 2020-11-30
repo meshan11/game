@@ -1,12 +1,13 @@
 package Application.Entity.Projectile;
 
+import Application.Entity.particle.Particle;
 import Application.Graphics.Screen;
 import Application.Graphics.Sprite;
 
 public class MagicProjectile extends Projectile {
 
 	public static final int FIRE_RATE = 15;
-	
+
 	public MagicProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 200;
@@ -19,7 +20,10 @@ public class MagicProjectile extends Projectile {
 	}
 
 	public void update() {
-		if (level.tileCollision(x, y, nx, ny, 7)) remove();
+		if (level.tileCollision(x, y, nx, ny, 7))
+		{
+			remove();
+		}
 		move();
 	}
 

@@ -44,6 +44,9 @@ public class Sprite {
 	// Projectiles Sprites:
 	public static Sprite projectileMagic = new Sprite(16, 0, 0, SpriteSheet.projectile);
 	
+	// Particles
+	public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
+	
 	public Sprite(int size, int color) {
 		SIZE = size;
 		this.width = size;
